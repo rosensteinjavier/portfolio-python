@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from indicators import get_indicators
+from datetime import datetime
 
 app = FastAPI()
 
@@ -24,3 +25,9 @@ def analyze():
 
     return out
 
+@app.get("/health")
+async def health_check():
+    return {
+        "status": "healthy",
+        "timestamp": datetime.now().isoformat()
+    }
